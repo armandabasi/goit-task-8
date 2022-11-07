@@ -36,7 +36,7 @@ def get_birthday_per_week(users):
         else:
             user['birthday'] = datetime(year = current_day.year, month = user['birthday'].month, day = user['birthday'].day)
         if user['birthday'] > current_day and user['birthday'] < current_day + timedelta(days=7): 
-            if user['birthday'].weekday() == 5  or user['birthday'].weekday() == 6:
+            if user['birthday'].weekday() in (5, 6):
                 if user['birthday'].weekday() == 5 and current_day.weekday() == 6:
                     pass
                 else:
@@ -44,8 +44,8 @@ def get_birthday_per_week(users):
             else: 
                 birthday_list[name_of_days[user['birthday'].weekday()]].append(user['name'])
     for name in name_of_days:
-        if len(birthday_list[name_of_days[name]]) != 0: 
+        if birthday_list[name_of_days[name]]: 
             print(f'{name_of_days[name]} : {", ".join(birthday_list[name_of_days[name]])}') 
 
-   
+
 get_birthday_per_week(users)
